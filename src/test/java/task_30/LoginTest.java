@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class Test1 {
+public class LoginTest {
     private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
     private final String URL = "https://mail.yandex.com";
     private final int WAIT = 10;
@@ -31,25 +31,25 @@ public class Test1 {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/credentials.csv")
-    void test1(String email, String pass) {
+    void verifyLogin(String email, String pass) {
         driver.get(URL);
-        driver.findElement(Test1Locators.FIRST_LOGIN_BUTTON).click();
-        WebElement loginInput = driver.findElement(Test1Locators.EMAIL_INPUT);
+        driver.findElement(LoginTestLocators.FIRST_LOGIN_BUTTON).click();
+        WebElement loginInput = driver.findElement(LoginTestLocators.EMAIL_INPUT);
         loginInput.sendKeys(email);
-        driver.findElement(Test1Locators.SUBMIT_BUTTON).click();
+        driver.findElement(LoginTestLocators.SUBMIT_BUTTON).click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) { // "native" programming language explicit waiter
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.presenceOfElementLocated(Test1Locators.PASS_INPUT)); // explicit waiter usage
-        WebElement passInput = driver.findElement(Test1Locators.PASS_INPUT);
+        wait.until(ExpectedConditions.presenceOfElementLocated(LoginTestLocators.PASS_INPUT)); // explicit waiter usage
+        WebElement passInput = driver.findElement(LoginTestLocators.PASS_INPUT);
         passInput.sendKeys(pass);
-        driver.findElement(Test1Locators.SUBMIT_BUTTON).click();
+        driver.findElement(LoginTestLocators.SUBMIT_BUTTON).click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(Test1Locators.USER_NAME_LABEL)); // explicit waiter usage
+        wait.until(ExpectedConditions.presenceOfElementLocated(LoginTestLocators.USER_NAME_LABEL)); // explicit waiter usage
 
-        Assertions.assertTrue(driver.findElement(Test1Locators.USER_NAME_LABEL).isEnabled());
+        Assertions.assertTrue(driver.findElement(LoginTestLocators.USER_NAME_LABEL).isEnabled());
     }
 
     @AfterEach

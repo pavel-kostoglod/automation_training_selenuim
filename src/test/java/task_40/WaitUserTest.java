@@ -1,6 +1,7 @@
 package task_40;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class Test4 {
+public class WaitUserTest {
     private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
     private final String URL = "https://demo.seleniumeasy.com/dynamic-data-loading-demo.html";
     private WebDriver driver;
@@ -26,11 +27,12 @@ public class Test4 {
     }
 
     @Test
-    void newUserAttributesAppearAfterClickingNewUserButton() {
+    void verifyNewUserAppearing() {
         driver.get(URL);
         driver.findElement(Task40Locators.GET_NEW_USER_BUTTON).click();
 
         wait.until(ExpectedConditions.presenceOfElementLocated(Task40Locators.NEW_USER_BLOCK_WITH_ATTRIBUTES));
+        Assertions.assertTrue(driver.findElement(Task40Locators.NEW_USER_BLOCK_WITH_ATTRIBUTES).isDisplayed());
     }
 
     @AfterEach

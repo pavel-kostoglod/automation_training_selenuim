@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Test3 {
+public class AlertsTest {
     private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
     private final String URL = "https://demo.seleniumeasy.com/javascript-alert-box-demo.html";
     private WebDriver driver;
@@ -23,25 +23,25 @@ public class Test3 {
     }
 
     @Test
-    void rightTextAppearsAfterClickingOkButtonInConfirmBox() {
+    void verifyOkButtonInConfirmBox() {
         driver.get(URL);
         driver.findElement(Task40Locators.CLICK_GO_GET_CONFIRM_BOX_BUTTON).click();
         driver.switchTo().alert().accept();
 
-        Assertions.assertTrue(driver.findElement(Task40Locators.ACCEPT_CONFIRM_BOX_TEXT).isDisplayed());
+        Assertions.assertEquals(driver.findElement(Task40Locators.CONFIRM_BOX_TEXT).getText(), "You pressed OK!");
     }
 
     @Test
-    void rightTextAppearsAfterClickingCancelButtonInConfirmBox() {
+    void verifyCancelButtonInConfirmBox() {
         driver.get(URL);
         driver.findElement(Task40Locators.CLICK_GO_GET_CONFIRM_BOX_BUTTON).click();
         driver.switchTo().alert().dismiss();
 
-        Assertions.assertTrue(driver.findElement(Task40Locators.DISMISS_CONFIRM_BOX_TEXT).isDisplayed());
+        Assertions.assertEquals(driver.findElement(Task40Locators.CONFIRM_BOX_TEXT).getText(), "You pressed Cancel!");
     }
 
     @Test
-    void rightTextAppearsAfterSubmittingSomeTextInAlertBox() {
+    void verifyAlertBox() {
         final String TEST_MESSAGE = "test message";
         driver.get(URL);
         driver.findElement(Task40Locators.CLICK_GO_GET_ALERT_BOX_BUTTON).click();

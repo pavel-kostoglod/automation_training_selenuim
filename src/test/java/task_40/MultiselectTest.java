@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Test2 {
+public class MultiselectTest {
     private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
     private final String URL = "https://demo.seleniumeasy.com/basic-select-dropdown-demo.html";
     private WebDriver driver;
@@ -27,7 +27,7 @@ public class Test2 {
     }
 
     @Test
-    void verify3SelectedOptionsInMultiselect() {
+    void verifyMultiselect() {
         driver.get(URL);
         Select select = new Select(driver.findElement(Task40Locators.SELECT));
         select.selectByVisibleText("California");
