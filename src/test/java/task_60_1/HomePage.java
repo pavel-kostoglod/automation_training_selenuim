@@ -1,16 +1,19 @@
 package task_60_1;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
-    WebDriver driver;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
+    public HomePage(WebDriverWait wait) {
+        this.wait = wait;
+        driver = LoginTests.getDriver();
     }
 
     public EmailPage clickLoginButton() {
         driver.findElement(Locators.FIRST_LOGIN_BUTTON).click();
-        return new EmailPage(driver);
+        return new EmailPage(wait);
     }
 }

@@ -7,12 +7,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EmailPage {
     private String EMAIL = "automationtester.p";
-    WebDriver driver;
+    private WebDriver driver;
     private WebDriverWait wait;
 
-    public EmailPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 3);
+    public EmailPage(WebDriverWait wait) {
+        this.wait = wait;
+        driver = LoginTests.getDriver();
     }
 
     public void enterEmail() {
@@ -23,6 +23,6 @@ public class EmailPage {
     public PasswordPage clickSubmitEmailButton() {
         driver.findElement(Locators.SUBMIT_BUTTON).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(Locators.PASS_INPUT));
-        return new PasswordPage(driver);
+        return new PasswordPage(wait);
     }
 }

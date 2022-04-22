@@ -2,13 +2,16 @@ package task_60_1;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PasswordPage {
     private String PASSWORD = "automationtester";
-    WebDriver driver;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    public PasswordPage(WebDriver driver) {
-        this.driver = driver;
+    public PasswordPage(WebDriverWait wait) {
+        this.wait = wait;
+        driver = LoginTests.getDriver();
     }
 
     public void enterPassword() {
@@ -18,6 +21,6 @@ public class PasswordPage {
 
     public PhoneNumberPage clickSubmitEmailButton() {
         driver.findElement(Locators.SUBMIT_BUTTON).click();
-        return new PhoneNumberPage(driver);
+        return new PhoneNumberPage(wait);
     }
 }
