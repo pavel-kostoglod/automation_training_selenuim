@@ -1,6 +1,7 @@
 package task_40;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,7 @@ public class EmployeeTest {
         for (Employee e: employeeList) {
             System.out.println(e);
         }
+        Assertions.assertTrue(employeeList.size() > 0);
     }
 
     @AfterEach
