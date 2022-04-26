@@ -1,4 +1,4 @@
-package task_60_2;
+package task_60_1;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -10,6 +10,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import task_60_2.EmailPage;
+import task_60_2.HomePage;
+import task_60_2.PasswordPage;
+import task_60_2.PhoneNumberPage;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +61,7 @@ public class LoginTests {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        HomePage homePage = new HomePage();
+        task_60_2.HomePage homePage = new HomePage();
         EmailPage emailPage = homePage.clickLoginButton();
         emailPage.enterEmail();
         PasswordPage passwordPage = emailPage.clickSubmitEmailButton();
