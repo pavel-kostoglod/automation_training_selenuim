@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverSingleton;
+import utils.WebDriverWaitSingleton;
 
 public class PasswordPage {
     private String PASSWORD = "automationtester";
@@ -19,8 +21,8 @@ public class PasswordPage {
     WebElement submitButton;
 
     public PasswordPage() {
-        wait = LoginTests.getWaiter();
-        driver = LoginTests.getDriver();
+        wait = WebDriverWaitSingleton.getWaiter();
+        driver = WebDriverSingleton.getDriver();
     }
 
     public void enterPassword() {

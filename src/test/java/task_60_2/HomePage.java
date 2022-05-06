@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverSingleton;
+import utils.WebDriverWaitSingleton;
 
 public class HomePage {
     private WebDriverWait wait;
@@ -15,8 +17,8 @@ public class HomePage {
     WebElement firstLoginButton;
 
     public HomePage() {
-        wait = LoginTests.getWaiter();
-        driver = LoginTests.getDriver();
+        wait = WebDriverWaitSingleton.getWaiter();
+        driver = WebDriverSingleton.getDriver();
         PageFactory.initElements(driver, this);
     }
 
