@@ -4,12 +4,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Screenshots;
+import utils.TestResultsWatcher;
 import utils.WebDriverSingleton;
 import utils.WebDriverWaitSingleton;
 
+@ExtendWith(TestResultsWatcher.class)
 public class LoginTests {
     private static WebDriver driver;
     private static WebDriverWait wait;
