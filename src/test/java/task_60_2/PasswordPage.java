@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.WebDriverSingleton;
 import utils.WebDriverWaitSingleton;
@@ -20,6 +21,9 @@ public class PasswordPage {
     @FindBy(how = How.CLASS_NAME, using = "Button2_type_submit")
     WebElement submitButton;
 
+    @FindBy(how = How.XPATH, using = "//a[@href='#inbox']")
+    WebElement mailBoxButton;
+
     public PasswordPage() {
         wait = WebDriverWaitSingleton.getWaiter();
         driver = WebDriverSingleton.getDriver();
@@ -29,8 +33,13 @@ public class PasswordPage {
         passwordInput.sendKeys(PASSWORD);
     }
 
-    public PhoneNumberPage clickSubmitEmailButton() {
+    public MailPage clickSubmitEmailButton() {
         submitButton.click();
-        return PageFactory.initElements(driver, PhoneNumberPage.class);
+        return PageFactory.initElements(driver, MailPage.class);
+    }
+
+    public boolean isMainPageAfterLogin() {
+        wait.until(ExpectedConditions.visibilityOf(mailBoxButton));
+        return mailBoxButton.isDisplayed();
     }
 }

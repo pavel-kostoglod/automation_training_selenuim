@@ -19,18 +19,17 @@ public class LoginTests {
 
     @BeforeEach
     void setup() {
-        System.setProperty("webdriver.chrome.driver", TestConstants.CHROME_DRIVER_PATH);
         driver = WebDriverSingleton.getDriver();
         wait = WebDriverWaitSingleton.getWaiter();
     }
 
     @AfterEach
     void cleanup() {
-        driver.quit();
+        WebDriverSingleton.quitDriver();
     }
 
     @Test
-    void verifyLoginAndLogout() {
+    void verifyLogin() {
         loadHomePage();
         HomePage homePage = new HomePage();
         Screenshots.makeScreenshot(driver, "home_page");
@@ -38,10 +37,24 @@ public class LoginTests {
         emailPage.enterEmail();
         PasswordPage passwordPage = emailPage.clickSubmitEmailButton();
         passwordPage.enterPassword();
-        PhoneNumberPage phoneNumberPage = passwordPage.clickSubmitEmailButton();
-        phoneNumberPage.logout();
+        passwordPage.clickSubmitEmailButton();
 
-        Assertions.assertTrue(phoneNumberPage.isPasswordPageAfterLogout());
+        Assertions.assertTrue(passwordPage.isMainPageAfterLogin());
+    }
+
+    @Test
+    void verifyLogout() {
+        loadHomePage();
+        HomePage homePage = new HomePage();
+        Screenshots.makeScreenshot(driver, "home_page");
+        EmailPage emailPage = homePage.clickLoginButton();
+        emailPage.enterEmail();
+        PasswordPage passwordPage = emailPage.clickSubmitEmailButton();
+        passwordPage.enterPassword();
+        MailPage mailPage = passwordPage.clickSubmitEmailButton();
+        mailPage.logout();
+
+        Assertions.assertTrue(mailPage.isPasswordPageAfterLogout());
     }
 
     private void loadHomePage() {
