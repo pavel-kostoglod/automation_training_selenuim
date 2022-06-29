@@ -7,6 +7,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverSingleton;
+import utils.WebDriverWaitSingleton;
 
 public class PhoneNumberPage {
     private WebDriverWait wait;
@@ -22,8 +24,8 @@ public class PhoneNumberPage {
     WebElement passwordInput;
 
     public PhoneNumberPage() {
-        wait = LoginTests.getWaiter();
-        driver = LoginTests.getDriver();
+        wait = WebDriverWaitSingleton.getWaiter();
+        driver = WebDriverSingleton.getDriver();
     }
 
     public PasswordPage logout() {

@@ -5,36 +5,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Screenshots;
+import utils.WebDriverSingleton;
+import utils.WebDriverWaitSingleton;
 
 public class LoginTests {
-    private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
-    private final String URL = "https://mail.yandex.com/";
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    private LoginTests() {}
-
-    public static WebDriver getDriver() {
-        if (driver == null) {
-            driver = new ChromeDriver();
-        }
-        return driver;
-    }
-
-    public static WebDriverWait getWaiter() {
-        if (wait == null) {
-            wait = new WebDriverWait(driver, 5);
-        }
-        return wait;
-    }
-
     @BeforeEach
     void setup() {
-        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
-        driver = getDriver();
-        wait = getWaiter();
+        System.setProperty("webdriver.chrome.driver", TestConstants.CHROME_DRIVER_PATH);
+        driver = WebDriverSingleton.getDriver();
+        wait = WebDriverWaitSingleton.getWaiter();
     }
 
     @AfterEach
@@ -46,6 +30,7 @@ public class LoginTests {
     void verifyLoginAndLogout() {
         loadHomePage();
         HomePage homePage = new HomePage();
+        Screenshots.makeScreenshot(driver, "home_page");
         EmailPage emailPage = homePage.clickLoginButton();
         emailPage.enterEmail();
         PasswordPage passwordPage = emailPage.clickSubmitEmailButton();
@@ -57,6 +42,6 @@ public class LoginTests {
     }
 
     private void loadHomePage() {
-        driver.get(URL);
+        driver.get(TestConstants.URL);
     }
 }

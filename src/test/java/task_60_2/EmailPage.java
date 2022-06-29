@@ -7,6 +7,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverSingleton;
+import utils.WebDriverWaitSingleton;
 
 public class EmailPage {
     private final String EMAIL = "automationtester.p";
@@ -23,8 +25,8 @@ public class EmailPage {
     WebElement passwordInput;
 
     public EmailPage() {
-        wait = LoginTests.getWaiter();
-        driver = LoginTests.getDriver();
+        wait = WebDriverWaitSingleton.getWaiter();
+        driver = WebDriverSingleton.getDriver();
     }
 
     public void enterEmail() {
