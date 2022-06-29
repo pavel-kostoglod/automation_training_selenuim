@@ -1,4 +1,4 @@
-package task_60_1;
+package task_60_2;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +12,7 @@ public class LoginTests {
     private final String CHROME_DRIVER_PATH = "src/test/resources/chromedriver";
     private final String URL = "https://mail.yandex.com/";
     private static WebDriver driver;
-    private WebDriverWait wait;
+    private static WebDriverWait wait;
 
     private LoginTests() {}
 
@@ -23,11 +23,18 @@ public class LoginTests {
         return driver;
     }
 
+    public static WebDriverWait getWaiter() {
+        if (wait == null) {
+            wait = new WebDriverWait(driver, 5);
+        }
+        return wait;
+    }
+
     @BeforeEach
     void setup() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = getDriver();
-        wait = new WebDriverWait(driver, 3);
+        wait = getWaiter();
     }
 
     @AfterEach
@@ -38,7 +45,7 @@ public class LoginTests {
     @Test
     void verifyLoginAndLogout() {
         loadHomePage();
-        HomePage homePage = new HomePage(wait);
+        HomePage homePage = new HomePage();
         EmailPage emailPage = homePage.clickLoginButton();
         emailPage.enterEmail();
         PasswordPage passwordPage = emailPage.clickSubmitEmailButton();
@@ -46,7 +53,7 @@ public class LoginTests {
         PhoneNumberPage phoneNumberPage = passwordPage.clickSubmitEmailButton();
         phoneNumberPage.logout();
 
-        Assertions.assertTrue(driver.findElement(Locators.PASS_INPUT).isDisplayed());
+        Assertions.assertTrue(phoneNumberPage.isPasswordPageAfterLogout());
     }
 
     private void loadHomePage() {
