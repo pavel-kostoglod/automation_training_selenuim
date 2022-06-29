@@ -11,7 +11,7 @@ import utils.WebDriverSingleton;
 import utils.WebDriverWaitSingleton;
 
 public class PasswordPage {
-    private String PASSWORD = "automationtester";
+    private String PASSWORD = "automationtester1";
     private WebDriverWait wait;
     private WebDriver driver;
 
