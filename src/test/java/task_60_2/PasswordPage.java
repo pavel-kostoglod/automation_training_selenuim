@@ -39,7 +39,6 @@ public class PasswordPage {
     }
 
     public boolean isMainPageAfterLogin() {
-        wait.until(ExpectedConditions.visibilityOf(mailBoxButton));
         return mailBoxButton.isDisplayed();
     }
 }

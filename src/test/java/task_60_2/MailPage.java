@@ -32,12 +32,10 @@ public class MailPage {
         wait.until(ExpectedConditions.visibilityOf(accountName));
         accountName.click();
         logoutButton.click();
-//        wait.until(ExpectedConditions.visibilityOf(passwordInput));
         return PageFactory.initElements(driver, PasswordPage.class);
     }
 
     public boolean isPasswordPageAfterLogout() {
-        wait.until(ExpectedConditions.visibilityOf(createAccountButton));
         return createAccountButton.isDisplayed();
     }
 }
