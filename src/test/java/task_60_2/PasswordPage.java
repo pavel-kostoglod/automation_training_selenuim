@@ -5,12 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.WebDriverSingleton;
 import utils.WebDriverWaitSingleton;
 
 public class PasswordPage {
-    private String PASSWORD = "automationtester";
+    private String PASSWORD = "automationtester1";
     private WebDriverWait wait;
     private WebDriver driver;
 
@@ -19,6 +20,9 @@ public class PasswordPage {
 
     @FindBy(how = How.CLASS_NAME, using = "Button2_type_submit")
     WebElement submitButton;
+
+    @FindBy(how = How.XPATH, using = "//a[@href='#inbox']")
+    WebElement mailBoxButton;
 
     public PasswordPage() {
         wait = WebDriverWaitSingleton.getWaiter();
@@ -29,8 +33,12 @@ public class PasswordPage {
         passwordInput.sendKeys(PASSWORD);
     }
 
-    public PhoneNumberPage clickSubmitEmailButton() {
+    public MailPage clickSubmitEmailButton() {
         submitButton.click();
-        return PageFactory.initElements(driver, PhoneNumberPage.class);
+        return PageFactory.initElements(driver, MailPage.class);
+    }
+
+    public boolean isMainPageAfterLogin() {
+        return mailBoxButton.isDisplayed();
     }
 }

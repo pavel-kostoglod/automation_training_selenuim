@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.WebDriverSingleton;
 import utils.WebDriverWaitSingleton;
 
-public class PhoneNumberPage {
+public class MailPage {
     private WebDriverWait wait;
     private WebDriver driver;
 
@@ -20,10 +20,10 @@ public class PhoneNumberPage {
     @FindBy(how = How.XPATH, using = "//*[@aria-label='Log out']")
     WebElement logoutButton;
 
-    @FindBy(how = How.NAME, using = "passwd")
-    WebElement passwordInput;
+    @FindBy(how = How.XPATH, using = "//a/*[contains(text(), 'Create an account')]")
+    WebElement createAccountButton;
 
-    public PhoneNumberPage() {
+    public MailPage() {
         wait = WebDriverWaitSingleton.getWaiter();
         driver = WebDriverSingleton.getDriver();
     }
@@ -32,11 +32,10 @@ public class PhoneNumberPage {
         wait.until(ExpectedConditions.visibilityOf(accountName));
         accountName.click();
         logoutButton.click();
-        wait.until(ExpectedConditions.visibilityOf(passwordInput));
         return PageFactory.initElements(driver, PasswordPage.class);
     }
 
     public boolean isPasswordPageAfterLogout() {
-        return passwordInput.isDisplayed();
+        return createAccountButton.isDisplayed();
     }
 }
