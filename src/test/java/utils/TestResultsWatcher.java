@@ -4,25 +4,20 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.Optional;
 
 public class TestResultsWatcher implements TestWatcher {
-    private final WebDriver driver;
-    private final String fileName;
     private final Capabilities capabilities;
 
     public TestResultsWatcher() {
-        this.fileName = RandomStringUtils.randomAlphabetic(10);
-        this.driver = WebDriverSingleton.getDriver();
-        this.capabilities = ((RemoteWebDriver) driver).getCapabilities();
+        this.capabilities = ((RemoteWebDriver) WebDriverSingleton.getDriver()).getCapabilities();
     }
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        Screenshots.makeScreenshot(driver, fileName);
+        Screenshots.makeScreenshot(WebDriverSingleton.getDriver(), RandomStringUtils.randomAlphabetic(10));
         System.out.println(capabilities.getBrowserName());
         WebDriverSingleton.quitDriver();
     }
