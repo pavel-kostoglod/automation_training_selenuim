@@ -1,5 +1,6 @@
 package task_60_2;
 
+import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,9 @@ import utils.WebDriverWaitSingleton;
 
 @ExtendWith(TestResultsWatcher.class)
 @Nested
-@DisplayName("Basic tests")
+
+@Epic("Log in examples")
+@Feature("Log in/log out tests")
 public class LoginTests {
     private static WebDriver driver;
     private static WebDriverWait wait;
@@ -28,7 +31,11 @@ public class LoginTests {
     }
 
     @Test
-    @DisplayName("Verify Login")
+    @Description("Verify Login")
+    @Issue("TEST-213")
+    @Link("https://example.org")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Log in story")
     void verifyLogin() {
         loadHomePage();
         HomePage homePage = new HomePage();
