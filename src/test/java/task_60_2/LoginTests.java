@@ -3,31 +3,46 @@ package task_60_2;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.Screenshots;
-import utils.TestResultsWatcher;
-import utils.WebDriverSingleton;
-import utils.WebDriverWaitSingleton;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.TestWatcher;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import utils.*;
 
-@ExtendWith(TestResultsWatcher.class)
+import java.net.MalformedURLException;
+
+//@ExtendWith(TestResultsWatcher.class)
 @Nested
-
 @Epic("Log in examples")
 @Feature("Log in/log out tests")
 public class LoginTests {
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+//    private static WebDriver driver;
+    private static RemoteWebDriver driver;
+//    private static WebDriverWait wait;
 
+    @RegisterExtension
+    public SauceTestWatcher watcher = new SauceTestWatcher();
+
+//    @BeforeEach
+//    void setup() {
+//        driver = WebDriverSingleton.getDriver();
+//        wait = WebDriverWaitSingleton.getWaiter();
+//    }
+
+    // new
     @BeforeEach
-    void setup() {
-        driver = WebDriverSingleton.getDriver();
-        wait = WebDriverWaitSingleton.getWaiter();
+    public void setup(TestInfo testInfo) throws MalformedURLException {
+        driver = RemoteWebDriverSingleton.getDriver();
     }
+
+//    @AfterEach
+//    void cleanup() {
+//        WebDriverSingleton.quitDriver();
+//    }
 
     @AfterEach
     void cleanup() {
-        WebDriverSingleton.quitDriver();
+        RemoteWebDriverSingleton.quitDriver();
     }
 
     @Test
